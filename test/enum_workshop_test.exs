@@ -1,8 +1,12 @@
 defmodule EnumWorkshopTest do
-  use ExUnit.Case
-  doctest EnumWorkshop
+  use ExUnit.Case, async: false
+  use ExCheck
+  # doctest EnumWorkshop
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  property :count_list do
+    for_all xs in list(int) do
+      EnumWorkshop.count(xs) == Enum.count(xs)
+    end
   end
+
 end
